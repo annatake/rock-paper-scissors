@@ -23,11 +23,11 @@ function playRound(playerSelection, computerSelection) {
         case (player === rock && computerSelection === scissors):
         case (player === paper && computerSelection === rock):
         case (player === scissors && computerSelection === paper):
-            result = `You win, ${player} beats ${computerSelection}`;
+            result = `You win, ${player} beats ${computerSelection}!`;
             playerPoints++;
             break;
         default:
-            result = `You lost, ${computerSelection} beats ${player}`;
+            result = `You lost, ${computerSelection} beats ${player}!`;
             computerPoints++;
             break;
     }
@@ -49,14 +49,16 @@ function playGame() {
         console.log(playRound(playerSelection, computerSelection));
         console.log(`Your score: ${playerPoints} \nComputer's score: ${computerPoints}`);
     }
-    console.log("~ * ~ FINAL RESULTS ~ * ~");
+    console.log("%c~ * ~ FINAL RESULTS ~ * ~", `
+                color: pink;
+                font-weight: bold;`);
     console.log(`Your score: ${playerPoints} \nComputer's score ${computerPoints}`);
     if (playerPoints > computerPoints) {
-        console.log("You win!!! (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧ ✧ﾟ･: *ヽ(◕ヮ◕ヽ)");
+        console.log("%cYou win!!! (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧ ✧ﾟ･: *ヽ(◕ヮ◕ヽ)", "color: green;");
     } else if (playerPoints === computerPoints) {
-        console.log("It's a tie! (☞ﾟヮﾟ)☞ ☜(ﾟヮﾟ☜) ");
+        console.log("%cIt's a tie! (☞ﾟヮﾟ)☞ ☜(ﾟヮﾟ☜) ", "color: blue;");
     } else {
-        console.log("You lost... ༼ つ ಥ_ಥ ༽つ");
+        console.log("%cYou lost... ༼ つ ಥ_ಥ ༽つ", "color: red;");
     }
 } 
 
@@ -72,4 +74,4 @@ function validateInput(playerSelection) {
     return (rockPaperScissorArr.includes(playerSelection))? true : false;
 }
 
-playGame();
+document.getElementById("play-button").addEventListener("click", playGame);
