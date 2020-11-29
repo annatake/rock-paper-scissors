@@ -40,7 +40,12 @@ function playGame() {
     for (let round = 1; round <= GAMES_TO_PLAY; round++) {
         console.log("Round " + round);
         let computerSelection = computerPlay();
-        let playerSelection = window.prompt("Choose rock, paper, or scissors: ");
+        let validInput = false;
+        let playerSelection;
+        while (!validInput) {
+            playerSelection = window.prompt("Choose rock, paper, or scissors: ");
+            validInput = validateInput(playerSelection);
+        }
         console.log(playRound(playerSelection, computerSelection));
         console.log(`Your score: ${playerPoints} \nComputer's score: ${computerPoints}`);
     }
@@ -58,6 +63,13 @@ function playGame() {
 function gameReset() {
     playerPoints = 0;
     computerPoints = 0;
+}
+
+function validateInput(playerSelection) {
+    if (playerSelection === null) {
+        return false;
+    }
+    return (rockPaperScissorArr.includes(playerSelection))? true : false;
 }
 
 playGame();
