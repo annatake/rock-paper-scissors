@@ -34,13 +34,13 @@ function playRound(playerSelection, computerSelection) {
     return result;
 }
 
-function game() {
+function playGame() {
     gameReset();
     const GAMES_TO_PLAY = 5;
     for (let round = 1; round <= GAMES_TO_PLAY; round++) {
         console.log("Round " + round);
         let computerSelection = computerPlay();
-        let playerSelection = prompt("Choose rock, paper, or scissors: ");
+        let playerSelection = window.prompt("Choose rock, paper, or scissors: ");
         console.log(playRound(playerSelection, computerSelection));
         console.log(`Your score: ${playerPoints} \nComputer's score: ${computerPoints}`);
     }
@@ -59,3 +59,5 @@ function gameReset() {
     playerPoints = 0;
     computerPoints = 0;
 }
+
+playGame();
