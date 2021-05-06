@@ -71,8 +71,17 @@ h1 {
   box-shadow: 2px 2px inset;
 }
 
+.fas {
+  pointer-events: none;
+}
+
 .win-lose-result {
-  height: 4rem;
+  color:white;
+  text-shadow: 2px 3px #338f83;
+  padding-top: 10px;
+  height: 3rem;
+  text-align: center;
+  font-size: 2rem;
 }
 
 .results {
