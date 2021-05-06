@@ -103,7 +103,14 @@ h1 {
 }
 
 .chosen-icons {
-  min-height: 25vh;
+  min-height: 20vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.chosen-icons i {
+  font-size: 6rem;
 }
 
 .points {

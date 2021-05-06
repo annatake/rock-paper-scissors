@@ -15,9 +15,12 @@ const scissorBtn = document.getElementById("scissor-btn");
 // get text elements to update
 const gameResult = document.querySelector(".win-lose-result");
 const roundCount = document.querySelector(".round-count");
-const playerPoints = document.getElementById(".player-points");
-const computerPoints = document.getElementById(".computer-points");
+const playerPoints = document.getElementById("player-points");
+const computerPoints = document.getElementById("computer-points");
 
+// get divs that contains icons representing choice
+const playerChoice = document.getElementById("player-choice");
+const computerChoice = document.getElementById("computer-choice");
 
 // Event Listeners
 document.addEventListener('DOMContentLoaded', gameReset);
@@ -94,12 +97,28 @@ function validateInput(playerSelection) {
     return (rockPaperScissorArr.includes(playerSelection))? true : false;
 }
 
+function displaySelection(selection, choiceDiv) {
+    switch(selection) {
+        case rock:
+            choiceDiv.innerHTML = '<i class="fas fa-hand-rock"></i>';
+            break;
+        case paper:
+            choiceDiv.innerHTML = '<i class="fas fa-hand-paper"></i>';
+            break;
+        case scissors:
+            choiceDiv.innerHTML = '<i class="fas fa-hand-scissors"></i>';
+            break;
+    }
+}
+
 function handleSelection(e) {
     const playerSelection = e.target.value;
-    let computerSelection = computerPlay();
+    const computerSelection = computerPlay();
     if (round !== GAMES_TO_PLAY) {
         let result = playRound(playerSelection, computerSelection);
         console.log(gameResult);
+        displaySelection(playerSelection, playerChoice);
+        displaySelection(computerSelection, computerChoice);
         gameResult.innerText = result;
     }
 }
