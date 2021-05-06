@@ -39,14 +39,17 @@ h1 {
 .game-btn {
   margin: 10px;
   padding: 1.5rem;
-  border: 2px solid rgb(255, 255, 255, 0.3);
-  border-radius: 30px;
+  color: #338f83;
   background: linear-gradient(to right top,
-  rgba(255, 221, 163, 0.85),
-  rgba(255, 255, 255, 0.25)
+  rgba(255, 221, 163, 0.7),
+  rgba(255, 255, 255, 0.15)
   );
   font-size: 3rem;
-  color: white;
+  border: 2px solid rgb(51, 143, 131);
+  padding: 1rem;
+  box-shadow: 4px 4px;
+  border-radius: 10px;
+  border-top-left-radius: 0px;
 }
 
 .game-btn:focus {
@@ -62,10 +65,10 @@ h1 {
 
 .game-btn:active {
   background: linear-gradient(to right top,
-  rgba(255, 221, 163, 0.5),
-  rgba(255, 255, 255, 0.1)
+  rgba(255, 221, 163, 0.7),
+  rgb(40, 116, 105, 0.3)
   );
-  border: 2px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 1px 1px inset;
 }
 
 .win-lose-result {
