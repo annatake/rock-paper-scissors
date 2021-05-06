@@ -24,24 +24,32 @@
         <h1>Rock Paper Scissors</h1>
     </div>
 
-    <div class="buttons-wrapper">    
-        <button class="game-btn" id="rock-btn">
-            <i class="fas fa-hand-rock"></i>
-        </button>
-        <button class="game-btn" id="hand-btn">
-            <i class="fas fa-hand-paper"></i>
-        </button>
-        <button class="game-btn" id="scissors-btn">
-            <i class="fas fa-hand-scissors"></i>
-        </button>
-    </div>
+    <div class="main-content">
+        <div class="buttons-wrapper">    
+            <button class="game-btn" id="rock-btn">
+                <i class="fas fa-hand-rock"></i>
+            </button>
+            <button class="game-btn" id="hand-btn">
+                <i class="fas fa-hand-paper"></i>
+            </button>
+            <button class="game-btn" id="scissors-btn">
+                <i class="fas fa-hand-scissors"></i>
+            </button>
+        </div>
 
-    <div class="results">
-        <div id="user-choice"></div>
-        <div id="computer-choice"></div>
 
-        <div id="user-count">Player: </div>
-        <div id="computer-count">Computer: </div>
+        <h2 class="win-lose-result"></h2>
+        <div class="results">
+            <div class="chosen-icons">
+                <div id="user-choice"></div>
+                <div id="computer-choice"></div>
+            </div>
+
+            <div class="points">
+                <div id="player-points">Player: 0</div>
+                <div id="computer-points">Computer: 0</div>
+            </div>
+        </div>
     </div>
 
     <script src='main.js'></script>

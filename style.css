@@ -6,8 +6,7 @@
 
 body {
   background-color: #95d4c0;
-  display: block;
-
+  font-family: 'Montserrat', sans-serif;
 }
 
 .title-wrapper {
@@ -15,16 +14,23 @@ body {
 }
 
 h1 {
-  font-family: 'Montserrat', sans-serif;
   font-size: 3rem;
   font-weight: 00;
   color: white;
   text-align: center;
-  margin-top: 1rem;
+  margin-top: 3rem;
+  text-shadow: 3px 5px #338f83;
+}
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  margin: 30px auto;
+  max-width: 700px;
 }
 
 .buttons-wrapper {
-  padding: 20px;
+  padding: 10px;
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -62,3 +68,29 @@ h1 {
   border: 2px solid rgba(255, 255, 255, 0.1);
 }
 
+.win-lose-result {
+  height: 4rem;
+}
+
+.results {
+  color: #338f83;
+  font-weight: 600;
+  font-size: 1.5rem;
+  display: flex;
+  flex-flow: column wrap;
+  border: 2px solid;
+  padding: 1rem;
+  box-shadow: 4px 4px;
+  border-radius: 10px;
+  border-top-left-radius: 0px;
+  margin: 15px 30px 30px 30px;
+}
+
+.chosen-icons {
+  min-height: 25vh;
+}
+
+.points {
+  display: flex;
+  justify-content: space-around;
+}
