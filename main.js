@@ -7,12 +7,12 @@ let playerPointCount = 0;
 let computerPointCount = 0;
 let round = 0;
 
-// get button elements
+// Get button elements
 const rockBtn = document.getElementById("rock-btn");
 const paperBtn = document.getElementById("paper-btn");
 const scissorBtn = document.getElementById("scissor-btn");
 
-// get elements to update
+// get elements for updating
 const gameResult = document.querySelector(".win-lose-result");
 const roundCount = document.querySelector(".round-count");
 const playerPoints = document.getElementById("player-points");
@@ -27,13 +27,22 @@ rockBtn.addEventListener("click", handleSelection);
 paperBtn.addEventListener("click", handleSelection);
 scissorBtn.addEventListener("click", handleSelection);
 
-
+/**
+ * rondomly choose selection for the computer
+ * @returns the computer's selection
+ */
 function computerPlay() {
     let randValue = Math.floor(Math.random() * rockPaperScissorArr.length);
     let computerSelection = rockPaperScissorArr[randValue];
     return computerSelection;
 }
 
+/**
+ * Compares the player's selection and the computer's selection to determine who won the round
+ * @param {string} playerSelection 
+ * @param {string} computerSelection 
+ * @returns result string
+ */
 function playRound(playerSelection, computerSelection) {
     console.log(`Player chose ${playerSelection}\nComputer chose ${computerSelection}`);
     let result;
@@ -56,7 +65,101 @@ function playRound(playerSelection, computerSelection) {
     return result;
 }
 
-function playGame() {
+/**
+ * Resets game variables and clears the previous game's result from the screen
+ */
+function gameReset() {
+    playerPointCount = 0;
+    computerPointCount = 0;
+    round = 0;
+    const prevGameResult = document.querySelector('.winner-result');
+    mainContent.removeChild(prevGameResult);
+}
+
+/**
+ * Displays the icon corresponding to the given selection in the given node
+ * @param {string} selection 
+ * @param {node} choiceDiv 
+ */
+function displaySelection(selection, choiceDiv) {
+    switch(selection) {
+        case rock:
+            choiceDiv.innerHTML = '<i class="fas fa-hand-rock"></i>';
+            break;
+        case paper:
+            choiceDiv.innerHTML = '<i class="fas fa-hand-paper"></i>';
+            break;
+        case scissors:
+            choiceDiv.innerHTML = '<i class="fas fa-hand-scissors"></i>';
+            break;
+    }
+}
+
+/**
+ * Increases the round count by 1 and updates the UI
+ */
+function updateRound() {
+    round++;
+    roundCount.innerText = `Round  ${round}`;
+}
+
+/**
+ * Updates the current score
+ * Displays the end result if game reached 5 rounds
+ */
+function updateScore() {
+    playerPoints.innerText = `Player: ${playerPointCount}`;
+    computerPoints.innerText = `Computer: ${computerPointCount}`;
+
+    if (round === GAMES_TO_PLAY) {
+        const endResult = document.createElement("h2");
+        endResult.classList.add("winner-result");
+
+        if (playerPointCount > computerPointCount) {
+            endResult.innerText = "You win!!!\n(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧ ✧ﾟ･: *ヽ(◕ヮ◕ヽ)";
+        } else if (playerPoints === computerPoints) {
+            endResult.innerText = "It's a tie!\n(☞ﾟヮﾟ)☞ ☜(ﾟヮﾟ☜)";
+        } else {
+            endResult.innerText = "You lost...\n༼ つ ಥ_ಥ ༽つ";
+        }
+        mainContent.appendChild(endResult);
+    }
+}
+
+/**
+ * Handles game mechanics when user makes a selection
+ * @param {event} e 
+ */
+function handleSelection(e) {
+    const playerSelection = e.target.value;
+    const computerSelection = computerPlay();
+
+    if (round === GAMES_TO_PLAY) {
+        gameReset();
+    }
+
+    let result = playRound(playerSelection, computerSelection);
+    console.log(gameResult);
+    displaySelection(playerSelection, playerChoice);
+    displaySelection(computerSelection, computerChoice);
+    gameResult.innerText = result;
+    updateRound();
+    updateScore();
+    
+}
+
+/**
+ * Deprecated code below
+ * Used for playing the game in the browser console
+ */
+
+//document.getElementById("play-button").addEventListener("click", playGame);
+
+/**
+ * Deprecated function
+ * For playing the game in browser console
+ */
+ function playGame() {
     gameReset();
     for (let round = 1; round <= GAMES_TO_PLAY; round++) {
         console.log("Round " + round);
@@ -83,77 +186,15 @@ function playGame() {
     }
 } 
 
-function gameReset() {
-    playerPointCount = 0;
-    computerPointCount = 0;
-    round = 0;
-    const prevGameResult = document.querySelector('.winner-result');
-    mainContent.removeChild(prevGameResult);
-}
-
-function validateInput(playerSelection) {
+/**
+ * Deprecated function, used to playing game in browser console
+ * Validates the user's selection
+ * @param {string} playerSelection 
+ * @returns true if the user input is one of rock, paper, scissors
+ */
+ function validateInput(playerSelection) {
     if (playerSelection === null) {
         return false;
     }
     return (rockPaperScissorArr.includes(playerSelection))? true : false;
 }
-
-function displaySelection(selection, choiceDiv) {
-    switch(selection) {
-        case rock:
-            choiceDiv.innerHTML = '<i class="fas fa-hand-rock"></i>';
-            break;
-        case paper:
-            choiceDiv.innerHTML = '<i class="fas fa-hand-paper"></i>';
-            break;
-        case scissors:
-            choiceDiv.innerHTML = '<i class="fas fa-hand-scissors"></i>';
-            break;
-    }
-}
-
-function updateRound() {
-    round++;
-    roundCount.innerText = `Round  ${round}`;
-}
-
-function updateScore() {
-    // display Winner if round == 5
-    playerPoints.innerText = `Player: ${playerPointCount}`;
-    computerPoints.innerText = `Computer: ${computerPointCount}`;
-
-    if (round === GAMES_TO_PLAY) {
-        const winnerResult = document.createElement("h2");
-        winnerResult.classList.add("winner-result");
-
-        if (playerPointCount > computerPointCount) {
-            winnerResult.innerText = "You win!!!\n(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧ ✧ﾟ･: *ヽ(◕ヮ◕ヽ)";
-        } else if (playerPoints === computerPoints) {
-            winnerResult.innerText = "It's a tie!\n(☞ﾟヮﾟ)☞ ☜(ﾟヮﾟ☜)";
-        } else {
-            winnerResult.innerText = "You lost...\n༼ つ ಥ_ಥ ༽つ";
-        }
-        mainContent.appendChild(winnerResult);
-    }
-}
-
-function handleSelection(e) {
-    const playerSelection = e.target.value;
-    const computerSelection = computerPlay();
-
-    if (round === GAMES_TO_PLAY) {
-        gameReset();
-    }
-
-    let result = playRound(playerSelection, computerSelection);
-    console.log(gameResult);
-    displaySelection(playerSelection, playerChoice);
-    displaySelection(computerSelection, computerChoice);
-    gameResult.innerText = result;
-    updateRound();
-    updateScore();
-    
-}
-
-
-//document.getElementById("play-button").addEventListener("click", playGame);
