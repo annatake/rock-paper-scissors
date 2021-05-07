@@ -13,6 +13,14 @@ body {
   position: relative;
 }
 
+.title-wrapper p {
+  text-align: center;
+  color:rgb(51, 143, 131);
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 15px;
+}
+
 h1 {
   font-size: 3rem;
   font-weight: 00;
@@ -78,10 +86,10 @@ h1 {
 .win-lose-result {
   color:white;
   text-shadow: 2px 3px #338f83;
-  padding-top: 10px;
-  height: 3rem;
+  height: 1rem;
   text-align: center;
-  font-size: 2rem;
+  font-size: 1.75rem;
+  margin-top: 10px;
 }
 
 .results {
@@ -95,7 +103,7 @@ h1 {
   box-shadow: 4px 4px;
   border-radius: 10px;
   border-top-left-radius: 0px;
-  margin: 15px 30px 30px 30px;
+  margin: 15px 30px 10px 30px;
 }
 
 .round-count {
@@ -116,4 +124,12 @@ h1 {
 .points {
   display: flex;
   justify-content: space-around;
+}
+
+.winner-result {
+  color: white;
+  text-shadow: 3px 4px #338f83;
+  text-align: center;
+  font-size: 2.5rem;;
+  margin-top: 10px;
 }

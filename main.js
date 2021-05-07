@@ -12,15 +12,14 @@ const rockBtn = document.getElementById("rock-btn");
 const paperBtn = document.getElementById("paper-btn");
 const scissorBtn = document.getElementById("scissor-btn");
 
-// get text elements to update
+// get elements to update
 const gameResult = document.querySelector(".win-lose-result");
 const roundCount = document.querySelector(".round-count");
 const playerPoints = document.getElementById("player-points");
 const computerPoints = document.getElementById("computer-points");
-
-// get divs that contains icons representing choice
 const playerChoice = document.getElementById("player-choice");
 const computerChoice = document.getElementById("computer-choice");
+const mainContent = document.querySelector(".main-content");
 
 // Event Listeners
 document.addEventListener('DOMContentLoaded', gameReset);
@@ -46,11 +45,11 @@ function playRound(playerSelection, computerSelection) {
         case (playerSelection === rock && computerSelection === scissors):
         case (playerSelection === paper && computerSelection === rock):
         case (playerSelection === scissors && computerSelection === paper):
-            result = `You win, ${playerSelection} beats ${computerSelection}!`;
+            result = `${playerSelection} beats ${computerSelection}!`;
             playerPointCount++;
             break;
         default:
-            result = `You lost, ${computerSelection} beats ${playerSelection}!`;
+            result = `${computerSelection} beats ${playerSelection}!`;
             computerPointCount++;
             break;
     }
@@ -88,6 +87,8 @@ function gameReset() {
     playerPointCount = 0;
     computerPointCount = 0;
     round = 0;
+    const prevGameResult = document.querySelector('.winner-result');
+    mainContent.removeChild(prevGameResult);
 }
 
 function validateInput(playerSelection) {
@@ -111,16 +112,47 @@ function displaySelection(selection, choiceDiv) {
     }
 }
 
+function updateRound() {
+    round++;
+    roundCount.innerText = `Round  ${round}`;
+}
+
+function updateScore() {
+    // display Winner if round == 5
+    playerPoints.innerText = `Player: ${playerPointCount}`;
+    computerPoints.innerText = `Computer: ${computerPointCount}`;
+
+    if (round === GAMES_TO_PLAY) {
+        const winnerResult = document.createElement("h2");
+        winnerResult.classList.add("winner-result");
+
+        if (playerPointCount > computerPointCount) {
+            winnerResult.innerText = "You win!!!\n(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧ ✧ﾟ･: *ヽ(◕ヮ◕ヽ)";
+        } else if (playerPoints === computerPoints) {
+            winnerResult.innerText = "It's a tie!\n(☞ﾟヮﾟ)☞ ☜(ﾟヮﾟ☜)";
+        } else {
+            winnerResult.innerText = "You lost...\n༼ つ ಥ_ಥ ༽つ";
+        }
+        mainContent.appendChild(winnerResult);
+    }
+}
+
 function handleSelection(e) {
     const playerSelection = e.target.value;
     const computerSelection = computerPlay();
-    if (round !== GAMES_TO_PLAY) {
-        let result = playRound(playerSelection, computerSelection);
-        console.log(gameResult);
-        displaySelection(playerSelection, playerChoice);
-        displaySelection(computerSelection, computerChoice);
-        gameResult.innerText = result;
+
+    if (round === GAMES_TO_PLAY) {
+        gameReset();
     }
+
+    let result = playRound(playerSelection, computerSelection);
+    console.log(gameResult);
+    displaySelection(playerSelection, playerChoice);
+    displaySelection(computerSelection, computerChoice);
+    gameResult.innerText = result;
+    updateRound();
+    updateScore();
+    
 }
 
 
