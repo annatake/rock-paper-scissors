@@ -12,7 +12,7 @@ const rockBtn = document.getElementById("rock-btn");
 const paperBtn = document.getElementById("paper-btn");
 const scissorBtn = document.getElementById("scissor-btn");
 
-// get elements for updating
+// Get elements for updating
 const gameResult = document.querySelector(".win-lose-result");
 const roundCount = document.querySelector(".round-count");
 const playerPoints = document.getElementById("player-points");
@@ -28,7 +28,7 @@ paperBtn.addEventListener("click", handleSelection);
 scissorBtn.addEventListener("click", handleSelection);
 
 /**
- * rondomly choose selection for the computer
+ * Randomly choose selection for the computer
  * @returns the computer's selection
  */
 function computerPlay() {
